@@ -1,0 +1,189 @@
+/* --- Timeline.css --- */
+/* Uses :root variables defined in App.css */
+
+.timeline-section {
+  /* Inherits padding from App.css global section styles */
+  background-color: var(--primary-color, #0d1117);
+  color: var(--secondary-color, #ffffff);
+}
+
+/* Base style for h2 is in App.css */
+
+.timeline {
+  position: relative;
+  margin: 0 auto;
+  max-width: 900px;
+  /* Wider for the alternating layout */
+  padding: 0 10px;
+}
+
+/* Central vertical line (The spine of the timeline) */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  /* Center the line */
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: rgba(var(--accent-color, #00bcd4), 0.3);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-item {
+  margin-bottom: 50px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+/* By default, content is on the right */
+.timeline-content {
+  width: 45%;
+  background-color: var(--card-bg, #161b22);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--accent-color, #00bcd4), 0.1);
+  transition: transform 0.3s ease;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  /* For even items, push content to the left side */
+  transform: translateX(-100%);
+}
+
+.timeline-item:nth-child(even) {
+  /* Swap direction for even items */
+  flex-direction: row-reverse;
+}
+
+
+/* The decorative dot (Icon container) */
+.timeline-dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--accent-color, #00bcd4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color, #0d1117);
+  font-size: 20px;
+  box-shadow: 0 0 0 6px var(--primary-color, #0d1117), 0 0 15px rgba(0, 188, 212, 0.8);
+  transition: transform 0.3s ease;
+  z-index: 3;
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.timeline-content h3 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+  color: var(--secondary-color, #ffffff);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.timeline-location {
+  font-size: 1rem;
+  color: var(--accent-color, #00bcd4);
+  font-weight: 500;
+  display: block;
+}
+
+.timeline-date {
+  font-size: 0.9rem;
+  color: var(--text-muted, #8b949e);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.timeline-content p {
+  font-size: 1rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.current-badge {
+  background-color: #34d058;
+  color: var(--primary-color, #0d1117);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 10px;
+  font-weight: 700;
+  border: 1px solid #34d058;
+}
+
+/* Connector Arrow (Small triangle pointing to the dot) */
+.timeline-content::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  top: 20px;
+  z-index: 10;
+}
+
+/* Arrow for Odd Items (pointing right) */
+.timeline-item:nth-child(odd) .timeline-content::after {
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent var(--card-bg, #161b22);
+  right: -10px;
+}
+
+/* Arrow for Even Items (pointing left) */
+.timeline-item:nth-child(even) .timeline-content::after {
+  border-width: 10px 10px 10px 0;
+  border-color: transparent var(--card-bg, #161b22) transparent transparent;
+  left: -10px;
+}
+
+/* --- Media Queries for Mobile (Single Column) --- */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+    /* Move line to the left */
+    transform: translateX(0);
+  }
+
+  .timeline-item {
+    flex-direction: row;
+    /* Ensure items flow correctly */
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .timeline-content {
+    width: 100%;
+    margin-left: 40px;
+    /* Space for the dot */
+    transform: translateX(0) !important;
+  }
+
+  .timeline-item:nth-child(even) .timeline-content {
+    transform: translateX(0) !important;
+  }
+
+  .timeline-dot {
+    left: 20px;
+    transform: translate(-50%, 0);
+  }
+
+  /* Hide the connector arrows on mobile for simplicity */
+  .timeline-content::after {
+    display: none;
+  }
+}

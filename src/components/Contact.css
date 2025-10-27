@@ -1,0 +1,142 @@
+/* --- Contact.css --- */
+/* Variables from App.css must be available here via :root or SCSS variables */
+
+.contact {
+    /* Uses global section padding from App.css, but sets a background if needed */
+    background-color: var(--primary-color, #0d1117);
+    color: var(--secondary-color, #ffffff);
+    text-align: center;
+    padding: 6rem 10%; /* Ensure consistency with global section padding */
+}
+
+/* Base style for h2 is in App.css */
+.contact-subtext {
+    color: var(--text-muted, #8b949e);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-inline: auto;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 2rem;
+    background-color: var(--card-bg, #161b22); /* Darker card background */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Premium shadow */
+    border: 1px solid rgba(0, 188, 212, 0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px 20px;
+    border: 1px solid var(--text-muted, #8b949e);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--primary-color, #0d1117); /* Input background should be very dark */
+    color: var(--secondary-color, #ffffff);
+    transition: all 0.3s ease;
+}
+
+/* Focus state for professional look */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color, #00bcd4);
+    box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.5);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 15px;
+    background-color: var(--accent-color, #00bcd4);
+    color: var(--primary-color, #0d1117);
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+}
+
+.contact-form button:hover:not(:disabled) {
+    background-color: #33e5f7;
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.6);
+}
+
+.contact-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* --- Social Links --- */
+
+.social-links {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-links a {
+    font-size: 2.2rem;
+    color: var(--secondary-color, #ffffff);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.15);
+    color: var(--accent-color, #00bcd4); /* Accent color hover */
+}
+
+/* --- Status Message --- */
+
+.form-status {
+    margin-top: 25px;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    font-weight: 600;
+}
+
+.form-status.success {
+    background-color: #161b22; /* Dark success background */
+    color: #34d058; /* Bright green text */
+    border: 1px solid #34d058;
+}
+
+.form-status.error {
+    background-color: #161b22;
+    color: #f85149; /* Bright red text */
+    border: 1px solid #f85149;
+}
+
+/* --- Media Queries --- */
+
+@media (max-width: 768px) {
+    .contact {
+        padding: 4rem 5%;
+    }
+    .contact-form {
+        padding: 1.5rem;
+    }
+    .social-links {
+        gap: 20px;
+    }
+    .social-links a {
+        font-size: 2rem;
+    }
+}

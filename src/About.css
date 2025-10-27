@@ -1,0 +1,109 @@
+/* --- About.css --- */
+/* Uses :root variables defined in App.css */
+
+.about {
+  background-color: var(--primary-color, #0d1117);
+  color: var(--secondary-color, #ffffff);
+  /* Inherits padding from App.css global section styles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  gap: 4rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.about-photo {
+  flex-shrink: 0;
+  padding: 10px;
+  border: 1px solid var(--accent-color, #00bcd4);
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.about-photo img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  filter: grayscale(100%) brightness(80%);
+  /* Darken and grayscale for classic look */
+  transition: filter 0.5s ease;
+}
+
+.about-photo img:hover {
+  filter: grayscale(0%) brightness(100%);
+  /* Color on hover */
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+/* Base style for h2 is in App.css */
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.quick-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid rgba(var(--accent-color, #00bcd4), 0.1);
+}
+
+.quick-facts div {
+  text-align: left;
+}
+
+.quick-facts span {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--accent-color, #00bcd4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.quick-facts strong {
+  font-size: 1.25rem;
+  color: var(--secondary-color, #ffffff);
+  font-weight: 700;
+}
+
+/* --- Media Queries --- */
+
+@media (max-width: 900px) {
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-photo {
+    order: -1;
+    /* Place photo above text on mobile */
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .quick-facts {
+    justify-content: center;
+    text-align: center;
+  }
+}

@@ -1,0 +1,103 @@
+/* --- Navbar.css (Custom Styles to Override/Augment App.css Navbar Base) --- */
+
+/* The .navbar base styles (position, background blur) are in the main App.css */
+.navbar {
+    /* Padding is defined in App.css: padding: 1rem 10%; */
+    /* Ensure no visual artifacts by setting a clear background */
+    background-color: rgba(13, 17, 23, 0.95);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease; /* Smooth background change on scroll if needed */
+}
+
+/* Brand/Name Link */
+.navbar-brand a {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color, #00bcd4); /* Vibrant name color */
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand a:hover {
+    color: var(--secondary-color, #ffffff);
+}
+
+/* Links Container */
+.navbar-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem; /* Generous spacing for classic look */
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual Links */
+.navbar-links a {
+    text-decoration: none;
+    color: var(--text-muted, #8b949e); /* Muted link color */
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    padding-bottom: 5px; /* Space for the line */
+}
+
+/* INNOVATIVE Hover Effect (Slide-out accent line) */
+.navbar-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--accent-color, #00bcd4);
+    transition: width 0.3s ease-out;
+}
+
+.navbar-links a:hover {
+    color: var(--secondary-color, #ffffff); /* Brighten text on hover */
+}
+
+.navbar-links a:hover::after {
+    width: 100%;
+}
+
+/* Highlight the Contact/CTA link */
+.contact-link {
+    color: var(--accent-color, #00bcd4) !important;
+    font-weight: 700 !important;
+    border: 1px solid var(--accent-color, #00bcd4);
+    padding: 5px 15px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    background-color: var(--accent-color, #00bcd4);
+    color: var(--primary-color, #0d1117) !important;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+}
+
+.contact-link:hover::after {
+    width: 0 !important; /* Disable the underline effect on the button */
+}
+
+/* --- Mobile / Tablet Styles --- */
+/* Hide regular links and show a burger icon if you implement a mobile menu */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 1rem 5%;
+    }
+    .navbar-links {
+        display: none; /* Hide for mobile; implement a mobile toggle here */
+    }
+    .navbar-brand {
+        width: 100%;
+        text-align: center;
+    }
+}
