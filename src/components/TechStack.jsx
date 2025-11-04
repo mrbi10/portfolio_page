@@ -2,9 +2,10 @@ import React from 'react';
 import './TechStack.css';
 
 const tech = {
-  Frontend: ['React.js', 'HTML', 'CSS', 'JavaScript', 'Canva', 'Adobe Photoshop'],
-  Backend: ['Node.js', 'Java', 'C', 'Python'],
-  Tools: ['Git', 'VSCode', 'Figma', 'Postman', 'Microsoft Office'],
+  Frontend: ['React.js', 'HTML', 'CSS', 'JavaScript'],
+  Backend: ['Node.js', 'Python', 'Express.js'],
+  Database: ['MySQL'],
+  Tools: ['Git', 'VSCode', 'Postman', 'Figma', 'Canva', 'Adobe Photoshop', 'Microsoft Office'],
   SoftSkills: ['Time Management', 'Video Editing', 'Branding', 'Content Editing', 'Career Management'],
   Fundamentals: [
     'Programming Foundations: Fundamentals',
@@ -13,6 +14,7 @@ const tech = {
     'Tech Career Skills'
   ]
 };
+
 
 
 function TechStack() {
