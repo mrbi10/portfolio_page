@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 
 import About from "./components/About";
@@ -19,7 +19,7 @@ import "aos/dist/aos.css";
 import { motion } from "framer-motion";
 
 const rotatingTexts = [
-  "ERP Developer from Chennai",
+  "Developer from Chennai",
   "React and Node.js Engineer",
   "Creator of MNMJEC ERP",
   "Full Stack Developer",
@@ -94,9 +94,26 @@ function Home() {
   );
 }
 
+function RouteBootstrap() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const redirectedPath = searchParams.get("path");
+
+    if (redirectedPath) {
+      navigate(redirectedPath, { replace: true });
+    }
+  }, [navigate, location.pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <RouteBootstrap />
       <Navbar />
 
       <Routes>

@@ -67,6 +67,26 @@
     width: 100%;
 }
 
+/* Highlight the Resume link */
+.resume-link {
+    color: var(--accent-color, #00bcd4) !important;
+    font-weight: 600 !important;
+    border: 1px solid var(--accent-color, #00bcd4);
+    padding: 5px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.resume-link:hover {
+    background-color: var(--accent-color, #00bcd4);
+    color: var(--primary-color, #0d1117) !important;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+}
+
+.resume-link:hover::after {
+    width: 0 !important; /* Disable the underline effect on the button */
+}
+
 /* Highlight the Contact/CTA link */
 .contact-link {
     color: var(--accent-color, #00bcd4) !important;

@@ -9,7 +9,7 @@ function About() {
         <div className="about-photo">
           <img
             src="/abinanthan-v.jpg"
-            alt="Abinanthan V - ERP Developer from Chennai"
+            alt="Abinanthan V - Developer from Chennai"
           />
         </div>
 
@@ -49,6 +49,15 @@ function About() {
               </strong>
             </div>
           </div>
+
+          <a 
+            href="https://drive.google.com/file/d/13C-nCC3EKQBgxHNIIdqnmsJxAetfG61y/view?usp=sharing" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="resume-button"
+          >
+            View Resume →
+          </a>
         </div>
       </div>
     </section>

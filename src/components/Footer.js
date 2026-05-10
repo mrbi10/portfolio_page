@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <p className="footer-text">
-          © {new Date().getFullYear()} Abinanthan V · ERP Developer · Chennai, India
+          © {new Date().getFullYear()} Abinanthan V · Developer · Chennai, India
         </p>
 
         <div className="footer-links">

@@ -85,6 +85,28 @@
   font-weight: 700;
 }
 
+.resume-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 12px 24px;
+  background-color: var(--accent-color, #00bcd4);
+  color: var(--primary-color, #0d1117);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+  cursor: pointer;
+  border: 2px solid var(--accent-color, #00bcd4);
+}
+
+.resume-button:hover {
+  background-color: transparent;
+  color: var(--accent-color, #00bcd4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 188, 212, 0.6);
+}
+
 /* --- Media Queries --- */
 
 @media (max-width: 900px) {
