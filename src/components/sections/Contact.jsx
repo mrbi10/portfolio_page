@@ -10,19 +10,19 @@ const socialLinks = [
     {
         name: 'GitHub',
         icon: faGithub,
-        url: 'https://github.com',
+        url: 'https://github.com/mrbi10',
         color: 'hover:text-gray-400',
     },
     {
         name: 'LinkedIn',
         icon: faLinkedin,
-        url: 'https://linkedin.com',
+        url: 'https://linkedin.com/in/mrbi',
         color: 'hover:text-neon-blue',
     },
     {
         name: 'Email',
         icon: faEnvelope,
-        url: 'mailto:contact@example.com',
+        url: 'mailto:abinanthan1006@gmail.com',
         color: 'hover:text-neon-cyan',
     },
 ];
