@@ -1,13 +1,84 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  * {
+    @apply transition-colors duration-300;
+  }
+
+  body {
+    @apply m-0 antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    @apply bg-dark-navy text-text-light dark:bg-dark-navy dark:text-text-light;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-24 lg:py-32;
+  }
+
+  .glass-card {
+    @apply glass rounded-xl p-6 md:p-8 hover:shadow-glow-lg transition-all duration-300 hover:border-neon-cyan;
+  }
+
+  .glass-card-dark {
+    @apply glass-dark rounded-xl p-6 md:p-8;
+  }
+
+  .glass-card-light {
+    @apply glass-light rounded-xl p-6 md:p-8;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg bg-gradient-to-r from-neon-cyan to-neon-blue text-dark-navy font-semibold transition-all duration-300 hover:shadow-glow-lg hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg border-2 border-neon-cyan text-neon-cyan font-semibold transition-all duration-300 hover:bg-neon-cyan hover:text-dark-navy hover:shadow-glow-lg active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply px-4 py-2 rounded-lg text-neon-cyan font-semibold hover:bg-neon-cyan hover:bg-opacity-10 transition-all duration-300;
+  }
+
+  .neon-heading {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold gradient-text;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .neon-subheading {
+    @apply text-2xl md:text-3xl font-semibold text-neon-cyan;
+  }
+
+  .gradient-divider {
+    @apply h-1 bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-purple;
+  }
+}
+
+/* Prevent font flickering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

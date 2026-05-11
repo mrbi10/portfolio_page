@@ -1,123 +1,170 @@
-/* --- Navbar.css (Custom Styles to Override/Augment App.css Navbar Base) --- */
-
-/* The .navbar base styles (position, background blur) are in the main App.css */
 .navbar {
-    /* Padding is defined in App.css: padding: 1rem 10%; */
-    /* Ensure no visual artifacts by setting a clear background */
-    background-color: rgba(13, 17, 23, 0.95);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background-color 0.3s ease; /* Smooth background change on scroll if needed */
+    gap: 1rem;
+    padding: 0.9rem max(1rem, calc((100vw - var(--page-width)) / 2));
+    background: rgba(6, 14, 25, 0.58);
+    border-bottom: 1px solid rgba(121, 194, 255, 0.1);
+    backdrop-filter: blur(22px) saturate(1.2);
 }
 
-/* Brand/Name Link */
 .navbar-brand a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
     text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem;
+    font-family: "Space Grotesk", Inter, sans-serif;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: var(--accent-color, #00bcd4); /* Vibrant name color */
-    letter-spacing: 0.5px;
-    transition: color 0.3s ease;
+    color: var(--secondary-color);
+    letter-spacing: 0.06em;
 }
 
-.navbar-brand a:hover {
-    color: var(--secondary-color, #ffffff);
+.brand-mark {
+    width: 2.35rem;
+    height: 2.35rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.85rem;
+    color: #07111f;
+    background: linear-gradient(135deg, var(--accent-color), #7df3ff 60%, var(--accent-2));
+    box-shadow: var(--glow-cyan);
 }
 
-/* Links Container */
 .navbar-links {
     display: flex;
+    align-items: center;
+    gap: 1.2rem;
     list-style: none;
-    gap: 2.5rem; /* Generous spacing for classic look */
     margin: 0;
     padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
 }
 
-/* Individual Links */
+.navbar-links::-webkit-scrollbar {
+    display: none;
+}
+
 .navbar-links a {
-    text-decoration: none;
-    color: var(--text-muted, #8b949e); /* Muted link color */
-    font-weight: 500;
-    font-size: 1rem;
     position: relative;
-    transition: color 0.3s ease;
+    display: inline-flex;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    padding-bottom: 5px; /* Space for the line */
+    white-space: nowrap;
+    transition: color 0.25s ease;
 }
 
-/* INNOVATIVE Hover Effect (Slide-out accent line) */
 .navbar-links a::after {
-    content: '';
+    content: "";
     position: absolute;
-    bottom: 0;
     left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: var(--accent-color, #00bcd4);
-    transition: width 0.3s ease-out;
+    bottom: -0.45rem;
+    width: 100%;
+    height: 0.12rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
 }
 
 .navbar-links a:hover {
-    color: var(--secondary-color, #ffffff); /* Brighten text on hover */
+    color: var(--secondary-color);
 }
 
 .navbar-links a:hover::after {
-    width: 100%;
+    transform: scaleX(1);
 }
 
-/* Highlight the Resume link */
 .resume-link {
-    color: var(--accent-color, #00bcd4) !important;
-    font-weight: 600 !important;
-    border: 1px solid var(--accent-color, #00bcd4);
-    padding: 5px 12px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+    color: var(--secondary-color) !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(39, 215, 255, 0.32);
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(10, 20, 36, 0.45);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .resume-link:hover {
-    background-color: var(--accent-color, #00bcd4);
-    color: var(--primary-color, #0d1117) !important;
-    box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+    background: linear-gradient(135deg, rgba(39, 215, 255, 0.2), rgba(110, 125, 255, 0.16));
 }
 
-.resume-link:hover::after {
-    width: 0 !important; /* Disable the underline effect on the button */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-/* Highlight the Contact/CTA link */
-.contact-link {
-    color: var(--accent-color, #00bcd4) !important;
-    font-weight: 700 !important;
-    border: 1px solid var(--accent-color, #00bcd4);
-    padding: 5px 15px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+.nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid rgba(39, 215, 255, 0.2);
+    border-radius: 999px;
+    padding: 0.62rem 0.9rem;
+    background: rgba(10, 20, 36, 0.46);
+    color: var(--secondary-color);
+    font: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.contact-link:hover {
-    background-color: var(--accent-color, #00bcd4);
-    color: var(--primary-color, #0d1117) !important;
-    box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+.nav-toggle:hover {
+    transform: translateY(-1px);
+    border-color: rgba(39, 215, 255, 0.4);
+    box-shadow: var(--glow-cyan);
 }
 
-.contact-link:hover::after {
-    width: 0 !important; /* Disable the underline effect on the button */
+.nav-toggle i {
+    color: var(--accent-color);
 }
 
-/* --- Mobile / Tablet Styles --- */
-/* Hide regular links and show a burger icon if you implement a mobile menu */
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
     .navbar {
-        padding: 1rem 5%;
+        flex-wrap: wrap;
     }
+
     .navbar-links {
-        display: none; /* Hide for mobile; implement a mobile toggle here */
-    }
-    .navbar-brand {
+        order: 3;
         width: 100%;
-        text-align: center;
+        justify-content: flex-start;
+        padding-top: 0.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding-inline: 1rem;
+        align-items: flex-start;
+    }
+
+    .navbar-brand {
+        flex: 1;
+    }
+
+    .navbar-links {
+        gap: 0.9rem;
+    }
+
+    .navbar-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .nav-toggle {
+        flex: 1;
+        justify-content: center;
     }
 }

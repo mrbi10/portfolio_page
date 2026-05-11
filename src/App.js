@@ -1,129 +1,131 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import "./App.css";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import './index.css';
 
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Timeline from "./components/Timeline";
-import TechStack from "./components/TechStack";
-import Contact from "./components/Contact";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Achievements from "./components/Achievements";
-import ScrollToTop from "./components/ScrollToTop";
-import MnMjecERP from "./pages/MnMjecERP";
+import { ThemeProvider } from './context/ThemeContext';
+import { Navbar } from './components/Navbar.jsx';
+import { Footer } from './components/Footer.jsx';
+import { Hero } from './components/sections/Hero';
+import { About } from './components/sections/About';
+import { TechStack } from './components/sections/TechStack';
+import { Projects } from './components/sections/Projects';
+import { Achievements } from './components/sections/Achievements';
+import { Timeline } from './components/sections/Timeline';
+import { Contact } from './components/sections/Contact';
+import { Timetable } from './pages/Timetable';
+import MnMjecERP from './pages/MnMjecERP';
 
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { motion } from "framer-motion";
-
-const rotatingTexts = [
-  "Developer from Chennai",
-  "React and Node.js Engineer",
-  "Creator of MNMJEC ERP",
-  "Full Stack Developer",
-  "Computer Science Engineering Student"
-];
-
-const textVariants = {
-  initial: { y: 20, opacity: 0 },
-  animate: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
-};
+// Initialize AOS
+AOS.init({
+  duration: 800,
+  once: true,
+  offset: 100,
+});
 
 function Home() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    AOS.init({ duration: 800, once: true, offset: 100 });
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((i) => (i + 1) % rotatingTexts.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <>
-      <header className="hero-section" id="hero">
-        <div className="hero-background-fx"></div>
-
-        <div className="hero-content">
-          <motion.h1
-            className="name"
-            initial="initial"
-            animate="animate"
-            variants={textVariants}
-          >
-            Abinanthan V
-          </motion.h1>
-
-          <motion.p
-            className="subtitle"
-            key={index}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            {rotatingTexts[index]}
-          </motion.p>
-
-          <motion.a
-            href="#projects"
-            className="cta-button"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
-            Explore My Work →
-          </motion.a>
-        </div>
-      </header>
-
-      <main>
-        <About />
-        <Timeline />
-        <Projects />
-        <Achievements />
-        <TechStack />
-        <Contact />
-      </main>
-    </>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Hero />
+      <About />
+      <TechStack />
+      <Projects />
+      <Achievements />
+      <Timeline />
+      <Contact />
+    </motion.div>
   );
 }
 
-function RouteBootstrap() {
-  const navigate = useNavigate();
-  const location = useLocation();
+function PageWrapper({ children }) {
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const redirectedPath = searchParams.get("path");
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-    if (redirectedPath) {
-      navigate(redirectedPath, { replace: true });
-    }
-  }, [navigate, location.pathname]);
-
-  return null;
+  return (
+    <motion.div
+      key={pathname}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
 function App() {
   return (
-    <Router>
-      <RouteBootstrap />
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/mnmjec-erp" element={<MnMjecERP />} />
-      </Routes>
-
-      <Footer />
-      <ScrollToTop />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div className="min-h-screen dark:bg-dark-navy bg-white dark:text-text-light text-gray-900">
+          <Navbar />
+          <main className="pt-20">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PageWrapper>
+                    <Home />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/mnmjec-erp"
+                element={
+                  <PageWrapper>
+                    <MnMjecERP />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/timetable"
+                element={
+                  <PageWrapper>
+                    <Timetable />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <PageWrapper>
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="text-center">
+                        <h1 className="text-5xl font-bold gradient-text mb-4">
+                          404 - Page Not Found
+                        </h1>
+                        <p className="dark:text-text-muted text-gray-600 mb-8">
+                          The page you're looking for doesn't exist.
+                        </p>
+                        <a
+                          href="/"
+                          className="inline-block px-6 py-3 btn-primary rounded-lg"
+                        >
+                          Go Home
+                        </a>
+                      </div>
+                    </div>
+                  </PageWrapper>
+                }
+              />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
