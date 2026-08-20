@@ -1,63 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
 
-  <!-- Primary SEO -->
-  <title>Abinanthan V | Developer | Chennai</title>
-  <meta name="description"
-    content="Abinanthan V is a Computer Science Engineering student from Chennai and the developer of the MNMJEC ERP system. Skilled in React, Node.js, and MySQL." />
-  <meta name="keywords"
-    content="Abinanthan, Abinanthan V, Developer Chennai, MNMJEC ERP, React Developer Chennai" />
-  <meta name="author" content="Abinanthan V" />
+    <!-- Mobile / Responsive -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Abinanthan V | Developer | Chennai" />
-  <meta property="og:description" content="Developer of the MNMJEC ERP system. React, Node.js, MySQL." />
-  <meta property="og:url" content="https://abinanthan.in" />
-  <meta property="og:type" content="website" />
+    <!-- Theme -->
+    <meta name="theme-color" content="#020617" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Abinanthan V | ERP Developer" />
-  <meta name="twitter:description" content="ERP Developer from Chennai. Built MNMJEC ERP using React and Node.js." />
+    <!-- =====================================================
+         PRIMARY SEO
+    ====================================================== -->
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Abinanthan V",
-    "url": "https://abinanthan.in",
-    "jobTitle": "ERP Developer",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Chennai",
-      "addressCountry": "India"
-    },
-    "sameAs": [
-      "https://github.com/mrbi10",
-      "https://linkedin.com/in/mrbi"
-    ]
-  }
-  </script>
+    <title>
+      Abinanthan V | Full-Stack Developer & ERP Developer
+    </title>
 
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-</head>
+    <meta
+      name="description"
+      content="Abinanthan V is a full-stack developer from Chennai specializing in React, Node.js, Express.js, MySQL, and scalable academic ERP systems."
+    />
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+    <meta
+      name="keywords"
+      content="Abinanthan V, Abinanthan, Full Stack Developer Chennai, React Developer Chennai, Node.js Developer Chennai, ERP Developer, MNMJEC ERP, React Node MySQL Developer"
+    />
 
-  <!-- SEO fallback -->
-  <h1 style="display:none;">Abinanthan V - ERP Developer from Chennai</h1>
+    <meta
+      name="author"
+      content="Abinanthan V"
+    />
 
-  <!-- THIS IS CRITICAL -->
-  <div id="root"></div>
+    <meta
+      name="robots"
+      content="index, follow"
+    />
 
-</body>
+    <meta
+      name="googlebot"
+      content="index, follow"
+    />
 
+    <!-- Canonical -->
+    <link
+      rel="canonical"
+      href="https://abinanthan.in/"
+    />
+
+    <!-- =====================================================
+         OPEN GRAPH / FACEBOOK / LINKEDIN
+    ====================================================== -->
+
+    <meta
+      property="og:title"
+      content="Abinanthan V | Full-Stack Developer & ERP Developer"
+    />
+
+    <meta
+      property="og:description"
+      content="Full-stack developer from Chennai building modern web applications and academic ERP systems using React, Node.js, Express.js, and MySQL."
+    />
+
+    <meta
+      property="og:url"
+      content="https://abinanthan.in/"
+    />
+
+    <meta
+      property="og:type"
+      content="website"
+    />
+
+    <meta
+      property="og:site_name"
+      content="Abinanthan V"
+    />
+
+    <meta
+      property="og:locale"
+      content="en_IN"
+    />
+
+    <!-- Add this image to /public -->
+    <meta
+      property="og:image"
+      content="https://abinanthan.in/og-image.png"
+    />
+
+    <meta
+      property="og:image:width"
+      content="1200"
+    />
+
+    <meta
+      property="og:image:height"
+      content="630"
+    />
+
+    <meta
+      property="og:image:alt"
+      content="Abinanthan V - Full-Stack Developer"
+    />
+
+    <!-- =====================================================
+         TWITTER / X
+    ====================================================== -->
+
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content="Abinanthan V | Full-Stack Developer"
+    />
+
+    <meta
+      name="twitter:description"
+      content="Full-stack developer from Chennai specializing in React, Node.js, Express.js, MySQL, and academic ERP systems."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://abinanthan.in/og-image.png"
+    />
+
+    <meta
+      name="twitter:image:alt"
+      content="Abinanthan V - Full-Stack Developer"
+    />
+
+    <!-- =====================================================
+         STRUCTURED DATA
+    ====================================================== -->
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Abinanthan V",
+        "url": "https://abinanthan.in/",
+        "jobTitle": "Full-Stack Developer",
+        "description": "Full-stack developer specializing in React, Node.js, Express.js, MySQL, and academic ERP systems.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chennai",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://github.com/mrbi10",
+          "https://www.linkedin.com/in/mrbi/",
+          "https://x.com/mr_bi_10",
+          "https://www.instagram.com/mr_bi_10/"
+        ],
+        "knowsAbout": [
+          "React.js",
+          "Node.js",
+          "Express.js",
+          "MySQL",
+          "JavaScript",
+          "Tailwind CSS",
+          "REST APIs",
+          "JWT Authentication",
+          "Full-Stack Development",
+          "ERP Systems"
+        ]
+      }
+    </script>
+
+    <!-- =====================================================
+         PWA
+    ====================================================== -->
+
+    <link
+      rel="manifest"
+      href="%PUBLIC_URL%/manifest.json"
+    />
+
+    <!-- Apple -->
+    <meta
+      name="apple-mobile-web-app-capable"
+      content="yes"
+    />
+
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Abinanthan V"
+    />
+  </head>
+
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+
+    <!-- React application -->
+    <div id="root"></div>
+  </body>
 </html>
