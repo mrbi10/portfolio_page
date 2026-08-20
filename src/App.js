@@ -9,14 +9,13 @@ import './index.css';
 import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar.jsx';
 import { Footer } from './components/Footer.jsx';
-import { Hero } from './components/sections/Hero';
-import { About } from './components/sections/About';
-import { TechStack } from './components/sections/TechStack';
-import { Projects } from './components/sections/Projects';
-import { Achievements } from './components/sections/Achievements';
-import { Timeline } from './components/sections/Timeline';
-import { Contact } from './components/sections/Contact';
-import { Timetable } from './pages/Timetable';
+import { Hero } from './pages/Hero';
+import { About } from './pages/About';
+import { TechStack } from './pages/TechStack';
+import { Projects } from './pages/Projects';
+import { Achievements } from './pages/Achievements';
+import { Timeline } from './pages/Timeline';
+import { Contact } from './pages/Contact';
 import MnMjecERP from './pages/MnMjecERP';
 
 // Initialize AOS
@@ -89,14 +88,7 @@ function App() {
                   </PageWrapper>
                 }
               />
-              <Route
-                path="/timetable"
-                element={
-                  <PageWrapper>
-                    <Timetable />
-                  </PageWrapper>
-                }
-              />
+              
               <Route
                 path="*"
                 element={
