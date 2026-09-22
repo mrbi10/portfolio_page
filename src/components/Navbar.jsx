@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -12,12 +12,13 @@ import {
 import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#tech' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Timeline', href: '#timeline' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '#about', type: 'section' },
+  { label: 'Skills', href: '#tech', type: 'section' },
+  { label: 'Projects', href: '#projects', type: 'section' },
+  { label: 'Blog', href: '/blog', type: 'route' },
+  { label: 'Achievements', href: '#achievements', type: 'section' },
+  { label: 'Timeline', href: '#timeline', type: 'section' },
+  { label: 'Contact', href: '#contact', type: 'section' },
 ];
 
 const resumeUrl =
@@ -28,6 +29,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const { isDark, toggleTheme } = useTheme();
+  const location = useLocation();
 
   /* --------------------------------
      Scroll handling
@@ -37,6 +39,7 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 30);
 
       const sections = navLinks
+        .filter((link) => link.type === 'section')
         .map((link) => document.querySelector(link.href))
         .filter(Boolean);
 
@@ -64,6 +67,16 @@ export function Navbar() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const getNavHref = (link) => {
+    if (link.type === 'route') {
+      return link.href;
+    }
+
+    return location.pathname === '/'
+      ? link.href
+      : `/${link.href}`;
+  };
 
   /* --------------------------------
      Lock body scroll on mobile menu
@@ -103,9 +116,8 @@ export function Navbar() {
           z-50
           transition-all
           duration-300
-          ${
-            isScrolled
-              ? `
+          ${isScrolled
+            ? `
                 dark:bg-dark-navy/90
                 bg-white/90
                 backdrop-blur-xl
@@ -115,7 +127,7 @@ export function Navbar() {
                 shadow-[0_8px_30px_rgba(0,0,0,0.08)]
                 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)]
               `
-              : 'bg-transparent'
+            : 'bg-transparent'
           }
         `}
       >
@@ -156,54 +168,33 @@ export function Navbar() {
             -------------------------------- */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => {
-                const sectionId = getSectionId(link.href);
-                const isActive = activeSection === sectionId;
+                const sectionId =
+                  link.type === 'section'
+                    ? getSectionId(link.href)
+                    : null;
 
-                return (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    whileHover={{ y: -2 }}
-                    className={`
-                      relative
-                      px-3
-                      py-2
-                      rounded-lg
-                      text-sm
-                      font-medium
-                      transition-colors
-                      ${
-                        isActive
-                          ? `
-                            dark:text-neon-cyan
-                            text-cyan-600
-                          `
-                          : `
-                            dark:text-text-muted
-                            text-gray-700
-                            hover:text-neon-cyan
-                            dark:hover:text-neon-cyan
-                          `
-                      }
-                    `}
-                  >
+                const isActive =
+                  link.type === 'section' &&
+                  activeSection === sectionId;
+
+                const linkContent = (
+                  <>
                     {link.label}
 
-                    {/* Active indicator */}
                     {isActive && (
                       <motion.span
                         layoutId="navbar-active"
                         className="
-                          absolute
-                          left-3
-                          right-3
-                          -bottom-0.5
-                          h-0.5
-                          rounded-full
-                          bg-gradient-to-r
-                          from-neon-cyan
-                          to-neon-blue
-                        "
+            absolute
+            left-3
+            right-3
+            -bottom-0.5
+            h-0.5
+            rounded-full
+            bg-gradient-to-r
+            from-neon-cyan
+            to-neon-blue
+          "
                         transition={{
                           type: 'spring',
                           stiffness: 400,
@@ -211,6 +202,58 @@ export function Navbar() {
                         }}
                       />
                     )}
+                  </>
+                );
+
+                return link.type === 'route' ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    onClick={handleNavClick}
+                    className="
+        relative
+        px-3
+        py-2
+        rounded-lg
+        text-sm
+        font-medium
+        transition-colors
+        dark:text-text-muted
+        text-gray-700
+        hover:text-neon-cyan
+        dark:hover:text-neon-cyan
+      "
+                  >
+                    {linkContent}
+                  </Link>
+                ) : (
+                  <motion.a
+                    key={link.label}
+                    href={getNavHref(link)}
+                    whileHover={{ y: -2 }}
+                    className={`
+        relative
+        px-3
+        py-2
+        rounded-lg
+        text-sm
+        font-medium
+        transition-colors
+        ${isActive
+                        ? `
+              dark:text-neon-cyan
+              text-cyan-600
+            `
+                        : `
+              dark:text-text-muted
+              text-gray-700
+              hover:text-neon-cyan
+              dark:hover:text-neon-cyan
+            `
+                      }
+      `}
+                  >
+                    {linkContent}
                   </motion.a>
                 );
               })}
@@ -376,10 +419,70 @@ export function Navbar() {
 
                 <div className="space-y-1">
                   {navLinks.map((link, index) => {
-                    const sectionId = getSectionId(link.href);
-                    const isActive = activeSection === sectionId;
+                    const sectionId =
+                      link.type === 'section'
+                        ? getSectionId(link.href)
+                        : null;
 
-                    return (
+                    const isActive =
+                      link.type === 'section' &&
+                      activeSection === sectionId;
+
+                    const className = `
+      flex
+      items-center
+      justify-between
+      px-4
+      py-3
+      rounded-xl
+      text-sm
+      font-medium
+      transition-all
+      ${isActive
+                        ? `
+            dark:bg-neon-cyan/10
+            bg-cyan-50
+            dark:text-neon-cyan
+            text-cyan-700
+          `
+                        : `
+            dark:text-text-light
+            text-gray-700
+            hover:bg-gray-100
+            dark:hover:bg-dark-card
+            hover:text-neon-cyan
+          `
+                      }
+    `;
+
+                    const content = (
+                      <>
+                        <span>{link.label}</span>
+
+                        {isActive && (
+                          <span
+                            className="
+              w-2
+              h-2
+              rounded-full
+              bg-neon-cyan
+              shadow-[0_0_10px_rgba(0,188,212,0.8)]
+            "
+                          />
+                        )}
+                      </>
+                    );
+
+                    return link.type === 'route' ? (
+                      <Link
+                        key={link.label}
+                        to={link.href}
+                        onClick={handleNavClick}
+                        className={className}
+                      >
+                        {content}
+                      </Link>
+                    ) : (
                       <motion.a
                         key={link.label}
                         href={link.href}
@@ -395,47 +498,9 @@ export function Navbar() {
                         transition={{
                           delay: index * 0.04,
                         }}
-                        className={`
-                          flex
-                          items-center
-                          justify-between
-                          px-4
-                          py-3
-                          rounded-xl
-                          text-sm
-                          font-medium
-                          transition-all
-                          ${
-                            isActive
-                              ? `
-                                dark:bg-neon-cyan/10
-                                bg-cyan-50
-                                dark:text-neon-cyan
-                                text-cyan-700
-                              `
-                              : `
-                                dark:text-text-light
-                                text-gray-700
-                                hover:bg-gray-100
-                                dark:hover:bg-dark-card
-                                hover:text-neon-cyan
-                              `
-                          }
-                        `}
+                        className={className}
                       >
-                        <span>{link.label}</span>
-
-                        {isActive && (
-                          <span
-                            className="
-                              w-2
-                              h-2
-                              rounded-full
-                              bg-neon-cyan
-                              shadow-[0_0_10px_rgba(0,188,212,0.8)]
-                            "
-                          />
-                        )}
+                        {content}
                       </motion.a>
                     );
                   })}

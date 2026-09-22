@@ -148,7 +148,7 @@ export function Footer() {
               </p>
 
               {/* Availability */}
-              <div
+              {/* <div
                 className="
                   inline-flex
                   items-center
@@ -198,7 +198,7 @@ export function Footer() {
                 >
                   Open to opportunities
                 </span>
-              </div>
+              </div> */}
             </motion.div>
 
             {/* Quick Links */}

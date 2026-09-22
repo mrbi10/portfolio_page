@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './index.css';
 
+
 import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar.jsx';
 import { Footer } from './components/Footer.jsx';
@@ -16,6 +17,8 @@ import { Projects } from './pages/Projects';
 import { Achievements } from './pages/Achievements';
 import { Timeline } from './pages/Timeline';
 import { Contact } from './pages/Contact';
+import Blog from './pages/Blog';
+import JeppiaarWorkshop from './pages/blog/JeppiaarWorkshop';
 import MnMjecERP from './pages/MnMjecERP';
 
 // Initialize AOS
@@ -88,7 +91,24 @@ function App() {
                   </PageWrapper>
                 }
               />
-              
+              <Route
+                path="/blog"
+                element={
+                  <PageWrapper>
+                    <Blog />
+                  </PageWrapper>
+                }
+              />
+
+              <Route
+                path="/blog/jeppiaar-full-stack-workshop"
+                element={
+                  <PageWrapper>
+                    <JeppiaarWorkshop />
+                  </PageWrapper>
+                }
+              />
+
               <Route
                 path="*"
                 element={

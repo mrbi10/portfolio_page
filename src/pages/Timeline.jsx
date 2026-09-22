@@ -77,7 +77,7 @@ const timelineData = [
     title: 'Primary and Secondary School',
     institution: "St. Mary's Matriculation Higher Secondary School",
     location: 'Chennai',
-    date: '2003 - 2017',
+    date: '2013 - 2017',
     description:
       'Completed secondary school education with strong academic performance and an early interest in technology and problem solving.',
     icon: faTrophy,
@@ -566,7 +566,7 @@ export function Timeline() {
                 "
               >
                 <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500 dark:bg-emerald-400" />
-                Open to Growth
+                 Learning ang growing
               </div>
             </div>
           </motion.div>

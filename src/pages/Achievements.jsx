@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Container,
@@ -57,6 +58,21 @@ const achievements = [
     color: 'cyan',
     link: 'https://drive.google.com/file/d/10JH0P0dW0ayoldSyVd0s1UANmzJUEYy-/view?usp=drive_web',
     tags: ['Leadership', 'Event Management', 'ACE'],
+  },
+
+  {
+    id: 14,
+    category: 'Speaking',
+    featured: true,
+    title: 'Resource Person — Full Stack Web Development Workshop',
+    organization: 'Jeppiaar Engineering College',
+    date: '19 Sep 2026',
+    description:
+      'Served as a Resource Person for a hands-on Full Stack Web Development workshop covering web fundamentals, Microsoft Azure, virtual machines, deployment and domain mapping for 3rd-year IT students.',
+    icon: faChalkboardTeacher,
+    color: 'cyan',
+    blogLink: '/blog/jeppiaar-full-stack-workshop',
+    tags: ['Full Stack', 'Microsoft Azure', 'Technical Workshop'],
   },
 
   {
@@ -308,13 +324,14 @@ const itemVariants = {
 export function Achievements() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedAchievement, setSelectedAchievement] = useState(null);
+  const navigate = useNavigate();
 
   const filteredAchievements =
     activeCategory === 'All'
       ? achievements
       : achievements.filter(
-          (item) => item.category === activeCategory
-        );
+        (item) => item.category === activeCategory
+      );
 
   const featuredAchievements = achievements.filter(
     (item) => item.featured
@@ -470,9 +487,14 @@ export function Achievements() {
                 <FeaturedCard
                   key={achievement.id}
                   achievement={achievement}
-                  onClick={() =>
-                    setSelectedAchievement(achievement.id)
-                  }
+                  onClick={() => {
+                    if (achievement.blogLink) {
+                      navigate(achievement.blogLink);
+                      return;
+                    }
+
+                    setSelectedAchievement(achievement.id);
+                  }}
                 />
               ))}
             </motion.div>
@@ -498,9 +520,8 @@ export function Achievements() {
                     transition-all
                     duration-300
 
-                    ${
-                      active
-                        ? `
+                    ${active
+                      ? `
                           border-cyan-500
                           bg-cyan-500
                           text-white
@@ -510,7 +531,7 @@ export function Achievements() {
                           dark:bg-cyan-400
                           dark:text-slate-950
                         `
-                        : `
+                      : `
                           border-slate-200
                           bg-white
                           text-slate-600
@@ -545,9 +566,14 @@ export function Achievements() {
                 <AchievementCard
                   key={achievement.id}
                   achievement={achievement}
-                  onClick={() =>
-                    setSelectedAchievement(achievement.id)
-                  }
+                  onClick={() => {
+                    if (achievement.blogLink) {
+                      navigate(achievement.blogLink);
+                      return;
+                    }
+
+                    setSelectedAchievement(achievement.id);
+                  }}
                 />
               ))}
             </motion.div>
@@ -986,27 +1012,30 @@ function AchievementCard({ achievement, onClick }) {
         {/* View indicator */}
         <div
           className="
-            mt-5
-            flex
-            items-center
-            gap-2
-            border-t
-            border-slate-100
-            pt-4
-            text-xs
-            font-semibold
-            text-slate-400
-            transition-colors
-            group-hover:text-cyan-600
-
-            dark:border-white/[0.06]
-            dark:group-hover:text-cyan-300
-          "
+    mt-5
+    flex
+    items-center
+    gap-2
+    border-t
+    border-slate-100
+    pt-4
+    text-xs
+    font-semibold
+    text-slate-400
+    transition-colors
+    group-hover:text-cyan-600
+    dark:border-white/[0.06]
+    dark:group-hover:text-cyan-300
+  "
         >
-          View details
+          {achievement.blogLink ? 'Read experience' : 'View details'}
 
           <FontAwesomeIcon
-            icon={faArrowUpRightFromSquare}
+            icon={
+              achievement.blogLink
+                ? faArrowUpRightFromSquare
+                : faArrowUpRightFromSquare
+            }
             className="text-[10px]"
           />
         </div>
