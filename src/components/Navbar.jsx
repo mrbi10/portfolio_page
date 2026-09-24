@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
@@ -30,6 +30,7 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState('');
   const { isDark, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   /* --------------------------------
      Scroll handling
@@ -68,15 +69,6 @@ export function Navbar() {
     };
   }, []);
 
-  const getNavHref = (link) => {
-    if (link.type === 'route') {
-      return link.href;
-    }
-
-    return location.pathname === '/'
-      ? link.href
-      : `/${link.href}`;
-  };
 
   /* --------------------------------
      Lock body scroll on mobile menu
@@ -98,6 +90,39 @@ export function Navbar() {
   };
 
   const getSectionId = (href) => href.replace('#', '');
+
+  const handleSectionClick = (href) => {
+    const sectionId = href.replace('#', '');
+
+    // Already on homepage
+    if (location.pathname === '/') {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+
+      return;
+    }
+
+    // Coming from another page
+    navigate('/');
+
+    // Wait for homepage to render, then scroll
+    setTimeout(() => {
+      const section = document.getElementById(sectionId);
+
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }, 100);
+  };
 
   return (
     <>
@@ -229,7 +254,12 @@ export function Navbar() {
                 ) : (
                   <motion.a
                     key={link.label}
-                    href={getNavHref(link)}
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSectionClick(link.href);
+                      handleNavClick();
+                    }}
                     whileHover={{ y: -2 }}
                     className={`
         relative
@@ -485,8 +515,12 @@ export function Navbar() {
                     ) : (
                       <motion.a
                         key={link.label}
-                        href={link.href}
-                        onClick={handleNavClick}
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleSectionClick(link.href);
+                          handleNavClick();
+                        }}
                         initial={{
                           opacity: 0,
                           x: -15,
